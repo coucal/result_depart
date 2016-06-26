@@ -22,7 +22,7 @@ app.controller('statecontroller', function($scope, LocationService) {
             $scope.StateTextToShow = "Please wait..";
 
             LocationService.GetState($scope.CountryId).then(function(d) {
-                scope.StateList = d.data;
+                $scope.StateList = d.data;
                 console.log(d.data)
                 $scope.StateTextToShow = "Select State";
             }, function(error) {

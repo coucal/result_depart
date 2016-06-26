@@ -11,7 +11,7 @@
       Country : <select ng-model="CountryId" ng-options="I.cp as I.dp for I in CountryList" ng-change="GetState()" >
         <option value= ""> Select Country </option>
       </select>
-      <br>State : <select ng-model="StateId" ng-options="I.StateId as I.StateName for I in StateList">
+      <br>State : <select ng-model="StateId" ng-options="I.code as I.libelle for I in StateList">
         <option > {{StateTextToShow}} </option>
       </select>
     </div>
