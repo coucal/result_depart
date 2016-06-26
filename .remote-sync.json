@@ -1,0 +1,16 @@
+{
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "vps261183.ovh.net",
+  "port": "22",
+  "target": "/var/www/angular",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "webmaster",
+  "keyfile": "Users/couchot/.ssh/id_rsa",
+  "passphrase": "Saule68100",
+  "transport": "scp"
+}

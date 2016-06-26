@@ -8,9 +8,13 @@
   </head>
   <body>
     <div ng-app="stateapp" ng-controller="statecontroller">
-      <select>
-        <option ng-repeat="x in states" value="{{ x.cp}}">{{x.dp}}</option>
+      Country : <select ng-model="CountryId" ng-options="I.cp as I.dp for I in CountryList" ng-change="GetState()" >
+        <option value= ""> Select Country </option>
       </select>
+      <br>State : <select ng-model="StateId" ng-options="I.StateId as I.StateName for I in StateList">
+        <option > {{StateTextToShow}} </option>
+      </select>
+    </div>
       <script src="script.js"></script>
   </body>
 </html>
