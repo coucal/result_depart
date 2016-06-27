@@ -1,155 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Angular menu</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-
-    html, body {
-      height:100%;
-      font-family: 'Cabin', sans-serif;
-      margin:0;
-    }
-
-    body {
-      width: 98%;
-      padding-left:1%;
-    }
-
-    h1 {
-      margin:0;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    h3 {
-      display: inline;
-    }
-
-    #map {
-      width: 100%;
-      height: 80%;
-    }
-
-    #logo {
-      float: right;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-
-    #title2 {
-      display: inline;
-      margin: 0;
-    }
-
-    #footer {
-      padding-top: 5px;
-      padding-bottom: 5px;
-      font-size: 1.2em;
-    }
-
-    .info {
-      padding: 6px 8px;
-      font-family: 'Cabin', sans-serif;
-      background: white;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      min-width: 450px;
-    }
-
-    .legend {
-      text-align: left;
-      line-height: 18px;
-      color: #555;
-    }
-
-    .legend ul {
-      padding-left: 0px;
-    }
-
-    .legend li {
-      list-style-type: none;
-    }
-
-    .leaflet-bar a.leaflet-control-touchhover-toggled {
-      background: #888;
-    }
-
-    @media screen and (max-width: 1080px) {
-      #title2 {
-        font-size: 1em;
-      }
-    }
-
-    @media screen and (max-width: 980px) {
-      #title {
-        font-size: 1.5em;
-      }
-      #title2 {
-        font-size: 0.8em;
-      }
-      #footer {
-        font-size: 0.8em;
-      }
-      .parti {
-        display: none;
-      }
-      .info {
-        min-width: 250px;
-      }
-    }
-
-    @media screen and (max-width: 780px) {
-      #title {
-        font-size: 1.4em;
-      }
-      #title2 {
-        font-size: 0.7em;
-      }
-      #footer {
-        display: none;
-      }
-      #map {
-        height: 83%;
-      }
-    }
-
-    @media screen and (max-width: 680px) {
-      #title {
-        font-size: 1.2em;
-      }
-      .info {
-        font-size: 0.8em;
-        min-width: 0px;
-      }
-    }
-  </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-    <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+</head>
 
-  </head>
-  <body>
+<body>
     <div ng-app="stateapp" ng-controller="statecontroller">
-      Depart : <select ng-model="DepartId" ng-options="I.cp as I.dp for I in DepartList" ng-change="GetCanton()" >
-        <option value= ""> Choisir le Departement </option>
-      </select>
-      <br>Canton : <select ng-model="CantonId" ng-options="I.code as I.libelle for I in CantonList">
-        <option value= ""> {{CantonTextToShow}} </option>
-      </select>
+        Depart :
+        <select ng-model="DepartId" ng-options="I.cp as I.dp for I in DepartList" ng-change="GetCanton()">
+            <option value=""> Choisir le Departement </option>
+        </select>
+        Canton :
+        <select ng-model="CantonId" ng-options="I.code as I.libelle for I in CantonList">
+            <option value=""> {{CantonTextToShow}} </option>
+        </select>
+        <label>
+            <input ng-model="NumTour" ng-value="1" type="radio" ng-checked="true">
+            1er tour
+        </label>
+        <label>
+            <input ng-model="NumTour" ng-value="2" type="radio">
+            2e tour
+        </label>
+        <input type="button" value="Resultat" ng-click="ShowResult()" />
+        <div style="padding:10px; font-weight:bold; color:#bcffd; border:1px solid #f3f3f3">
+            {{Display}}<br>
+            {{Resultat | json}}
+        </div>
     </div>
-    <div class="leaflet-top leaflet-right">
-    <div class="legend info leaflet-control">
-      <h3 style="display:inline;">Résultats à Montpellier 2e tour</h3>
-      <br>Survolez un bureau de vote pour plus de détails<ul>
-        <li><canvas id="myCanvas" width="75.08373160727054" height="20" style="border:1px solid #EEA2B0; background-color:#EEA2B0; opacity: 0.6;"></canvas> Saurel<span class="parti"> (Montpellier, c'est Vous [DVG])</span> : 37.54%</li>
-        <li><canvas id="myCanvas" width="54.79496732272106" height="20" style="border:1px solid #e20040; background-color:#e20040; opacity: 0.6;"></canvas> Moure<span class="parti"> (MONTPELLIER ! AVEC JEAN-PIERRE MOURE [UG-PS])</span> : 27.40%</li>
-        <li><canvas id="myCanvas" width="51.759304557257366" height="20" style="border:1px solid #4D6BA2; background-color:#4D6BA2; opacity: 0.6;"></canvas> Domergue<span class="parti"> (ICI, C'EST MONTPELLIER [UD-UMP])</span> : 25.88%</li>
-        <li><canvas id="myCanvas" width="18.361996512751038" height="20" style="border:1px solid #1B2638; background-color:#1B2638; opacity: 0.6;"></canvas> Jamet<span class="parti"> (MONTPELLIER FAIT FRONT [FN])</span> : 9.18%</li>
-      </ul>
-    </div>
-  </div>
-      <script src="script.js"></script>
-  </body>
+    <script src="script.js"></script>
+</body>
+
 </html>

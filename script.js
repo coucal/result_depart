@@ -5,6 +5,7 @@ app.controller('statecontroller', function($scope, LocationService) {
         $scope.CantonId = null;
         $scope.DepartList = null;
         $scope.CantonList = null;
+        $scope.NumTour="1";
         $scope.CantonTextToShow = "Choisir un canton";
         $scope.result="";
 
@@ -19,6 +20,7 @@ app.controller('statecontroller', function($scope, LocationService) {
         $scope.GetCanton = function() {
             $scope.CantonId = null;
             $scope.CantonList = null;
+            $scope.Resultat=null;
             $scope.CantonTextToShow = "Un instant...";
 
             LocationService.GetCanton($scope.DepartId).then(function(d) {
@@ -30,8 +32,16 @@ app.controller('statecontroller', function($scope, LocationService) {
                 alert("error !");
             });
         }
+
         $scope.ShowResult = function() {
-            $scope.Result = "Selected " + $scope.DepartId + " Canton Id:" + $scope.CantonId;
+            LocationService.GetResult($scope.DepartId, $scope.CantonId, $scope.NumTour).then(function(d) {
+                $scope.Resultat = d.data;
+                console.log(d.data)
+                $scope.Display = "Selected " + $scope.DepartId + " Canton Id:" + $scope.CantonId+ " Tour: "+ $scope.NumTour;
+              }, function(error) {
+                console.log(error);
+                alert("error !");
+            });
         }
     })
     .factory('LocationService', function($http) {
@@ -47,9 +57,9 @@ app.controller('statecontroller', function($scope, LocationService) {
             return $http.get("http://docsa.fr:8080/depart/cantons/" + DepartId);
         }
 
-        fac.GetResult = function(DepartId) {
-            console.log("GetCanton");
-            return $http.get("http://docsa.fr:8080/depart/result/" + DepartId);
+        fac.GetResult = function(DepartId, CantonId, NumTour) {
+            console.log("GetResult");
+            return $http.get("http://docsa.fr:8080/depart/resultats/"+ NumTour+ "/" + DepartId+"/"+CantonId);
         }
 
         return fac;
