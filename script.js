@@ -54,12 +54,12 @@ app.controller('statecontroller', function($scope, LocationService) {
 
         fac.GetCanton = function(DepartId) {
             console.log("GetCanton");
-            return $http.get("http://docsa.fr:8080/depart/cantons/" + DepartId);
+            return $http.get("http://api.docsa.fr/depart/cantons/" + DepartId);
         }
 
         fac.GetResult = function(DepartId, CantonId, NumTour) {
             console.log("GetResult");
-            return $http.get("http://docsa.fr:8080/depart/resultats/"+ NumTour+ "/" + DepartId+"/"+CantonId);
+            return $http.get("http://api.docsa.fr/depart/resultats/"+ NumTour+ "/" + DepartId+"/"+CantonId);
         }
 
         return fac;
