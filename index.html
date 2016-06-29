@@ -27,9 +27,11 @@
             2e tour
         </label>
         <input type="button" value="Resultat" ng-click="ShowResult()" />
-        <div style="padding:10px; font-weight:bold; color:#bcffd; border:1px solid #f3f3f3">
-            {{Display}}<br>
-            {{Resultat | json}}
+        <div class="info">
+            <h3>{{Display}}</h3>
+            <ul>
+              <li ng-repeat="I in Resultat">{{I.liblisext}} ({{I.codnua}}) : {{I.nbrvoix}}</li>
+            </ul>
         </div>
     </div>
     <script src="script.js"></script>
