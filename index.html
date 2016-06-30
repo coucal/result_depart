@@ -30,7 +30,7 @@
         <div class="info">
             <h3>{{Display}}</h3>
             <ul>
-              <li ng-repeat="I in Resultat">{{I.liblisext}} ({{I.codnua}}) : {{I.nbrvoix}}</li>
+              <li ng-repeat="I in Resultat"><pourcent-bar progress="I.pourcent"  progress-id="I.codnua"></pourcent-bar> {{I.liblisext}} ({{I.codnua}}) : {{I.nbrvoix}}</li>
             </ul>
         </div>
     </div>

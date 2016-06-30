@@ -64,28 +64,24 @@ app.controller('statecontroller', function($scope, LocationService) {
 
         return fac;
     })
-    .directive("progressBar", function ()
+    .directive("pourcentBar", function ()
     {
       return {
           restrict: 'E',
           scope: {
               progress: '=',
-              progressId: '@'
+              progressId: '='
           },
-          template: "<canvas id='pgcanvas' width='400' height='30'  background-color: #F00'/>",
+          template: "<canvas id='pgcanvas' width='300' height='30'  background-color: #F00'/>",
           link: function(scope, element, attrs) {
-             console.log(element);
              console.log(scope);
              scope.canvas = element.find('canvas')[0];
              scope.context = scope.canvas.getContext('2d');
-
-             scope.$watch('progress', function(newValue) {
-               barWidth = Math.ceil(newValue / 100 * scope.canvas.width);
+               barWidth = Math.ceil(scope.progress  * scope.canvas.width);
                scope.context.fillStyle = "#DDD";
                scope.context.fillRect(0, 0, scope.canvas.width, scope.canvas.height);
                scope.context.fillStyle = "#F00";
                scope.context.fillRect(0, 0, barWidth, scope.canvas.height);
-             });
           }
       };
     });;
