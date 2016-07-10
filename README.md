@@ -1,1 +1,4 @@
-un debut de page de consultation des resultats
+#Consultation des resultats des déparementales
+
+Utilise l'API docsa.fr
+
